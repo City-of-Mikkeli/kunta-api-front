@@ -4,6 +4,9 @@ connect
 
 set clusterPassword=${clusterPassword}
 set clusterMaxHeap=${clusterMaxHeap}
+set managementAddress=${managementAddress}
+set publicAddress=${publicAddress}
+set unsecuredAddress=${unsecuredAddress}
 
 /server-group=main-server-group/jvm=default:write-attribute(name=max-heap-size,value=$clusterMaxHeap)
 
@@ -54,3 +57,7 @@ echo Remove server-one
 if (outcome == success) of /host=master/server-config=server-one:read-resource
   /host=master/server-config=server-one:remove()
 end-if
+
+/interface=management:write-attribute(name=inet-address,value=${managementAddress})
+/interface=public:write-attribute(name=inet-address,value=${publicAddress})
+/interface=unsecured:write-attribute(name=inet-address,value=${unsecuredAddress})
