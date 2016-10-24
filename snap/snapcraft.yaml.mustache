@@ -22,6 +22,9 @@ parts:
     source: http://download.jboss.org/wildfly/10.1.0.Final/wildfly-10.1.0.Final.tar.gz
     stage-packages:
       - openjdk-8-jdk
+  webapp:
+    plugin: maven
+    source: ../
   local-files:
     plugin: make
     source: .
