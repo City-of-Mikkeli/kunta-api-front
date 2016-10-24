@@ -1,0 +1,38 @@
+connect
+
+:start-servers(blocking=true)
+
+set clusterPassword=${clusterPassword}
+set clusterMaxHeap=${clusterMaxHeap}
+
+/server-group=main-server-group/jvm=default:write-attribute(name=max-heap-size,value=$clusterMaxHeap)
+
+if (outcome != success) of /system-property=jboss.messaging.cluster.password:read-resource
+  /system-property=jboss.messaging.cluster.password:add(value=$clusterPassword)
+end-if
+
+echo Ensuring full-ha profile in main server group
+/server-group=main-server-group:write-attribute(name=profile,value=full-ha)
+/server-group=main-server-group:write-attribute(name=socket-binding-group, value=full-ha-sockets)
+
+echo Remove profile default
+if (outcome == success) of /profile=default:read-resource
+  /profile=default:remove()
+end-if
+
+echo Remove profile full
+if (outcome == success) of /profile=full:read-resource
+  /profile=full:remove()
+end-if
+
+echo Remove profile ha
+if (outcome == success) of /profile=ha:read-resource
+  /profile=ha:remove()
+end-if
+
+echo Remove profile load-balancer
+if (outcome == success) of /profile=load-balancer:read-resource
+  /profile=load-balancer:remove()
+end-if
+
+:reload-servers(blocking=true)
