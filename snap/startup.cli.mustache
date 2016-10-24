@@ -58,6 +58,6 @@ if (outcome == success) of /host=master/server-config=server-one:read-resource
   /host=master/server-config=server-one:remove()
 end-if
 
-/interface=management:write-attribute(name=inet-address,value=${managementAddress})
-/interface=public:write-attribute(name=inet-address,value=${publicAddress})
-/interface=unsecure:write-attribute(name=inet-address,value=${unsecureAddress})
+/interface=management:write-attribute(name=inet-address,value=$managementAddress)
+/interface=public:write-attribute(name=inet-address,value=$publicAddress)
+/interface=unsecure:write-attribute(name=inet-address,value=$unsecureAddress)
