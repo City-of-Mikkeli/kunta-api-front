@@ -3,6 +3,7 @@
 set -e
 set -x
 
+export JAVA="/usr/bin/java"
 export JBOSS_HOME="$SNAP"
 export JBOSS_MODE=domain
 export JBOSS_LOG_DIR="$SNAP_DATA/wildfly/$JBOSS_MODE/log/"
