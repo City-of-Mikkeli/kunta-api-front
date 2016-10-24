@@ -1,0 +1,8 @@
+language: java
+sudo: false
+jdk: oraclejdk8
+install: true
+script: echo Ok
+notifications:
+  webhooks:
+    - http://travis.metatavu.io:7333/travisping
