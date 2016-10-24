@@ -6,7 +6,7 @@ set clusterPassword=${clusterPassword}
 set clusterMaxHeap=${clusterMaxHeap}
 set managementAddress=${managementAddress}
 set publicAddress=${publicAddress}
-set unsecuredAddress=${unsecuredAddress}
+set unsecureAddress=${unsecureAddress}
 
 /server-group=main-server-group/jvm=default:write-attribute(name=max-heap-size,value=$clusterMaxHeap)
 
@@ -60,4 +60,4 @@ end-if
 
 /interface=management:write-attribute(name=inet-address,value=${managementAddress})
 /interface=public:write-attribute(name=inet-address,value=${publicAddress})
-/interface=unsecured:write-attribute(name=inet-address,value=${unsecuredAddress})
+/interface=unsecure:write-attribute(name=inet-address,value=${unsecureAddress})
