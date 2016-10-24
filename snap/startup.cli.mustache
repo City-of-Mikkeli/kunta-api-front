@@ -35,11 +35,27 @@ if (outcome == success) of /profile=load-balancer:read-resource
   /profile=load-balancer:remove()
 end-if
 
+echo Remove server-three
+if (outcome == success) of /host=master/server-config=server-three:read-resource
+  /host=master/server-config=server-three:stop(blocking=true)
+  /host=master/server-config=server-three:remove()
+end-if
+
 echo Remove other-server-group
 if (outcome == success) of /server-group=other-server-group:read-resource
   /server-group=other-server-group:remove()
 end-if
 
+echo Remove server-two
+if (outcome == success) of /host=master/server-config=server-two:read-resource
+  /host=master/server-config=server-two:stop(blocking=true)
+  /host=master/server-config=server-two:remove()
+end-if
 
+echo Remove server-one
+if (outcome == success) of /host=master/server-config=server-one:read-resource
+  /host=master/server-config=server-one:stop(blocking=true)
+  /host=master/server-config=server-one:remove()
+end-if
 
 :reload-servers(blocking=true)
